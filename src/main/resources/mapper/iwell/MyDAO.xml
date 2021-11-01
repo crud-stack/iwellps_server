@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iwell.eye.dao.MyDAO">
+    <select id="postAdminInfo" parameterType="com.iwell.eye.model.UserVO" resultType="com.iwell.eye.model.UserVO">
+        SELECT
+            UserSID as userSid
+        ,   UserNm as userNm
+        ,   Email as email
+        ,   Auth as auth
+        ,   Phone as phone
+        ,   Spot  as spot
+        ,   Sex as sex
+        FROM tb_user
+        WHERE UserSID = #{userSid}
+        AND UseYn = 1
+
+    </select>
+    <select id="postCustInfo" parameterType="com.iwell.eye.model.CustVO" resultType="com.iwell.eye.model.CustVO">
+        SELECT
+                CustSID as custSid
+        ,       CustNm  as custnm
+        ,       BirthDay    as birthDay
+        ,       Sex     as sex
+        ,       Phone as phone
+        ,       MktYn as mktYn
+        ,       DATE_FORMAT(MktDt, '%Y-%m-%d %T') as mktDt
+        FROM tb_cust
+        WHERE custSid = #{custSid}
+        AND UseYn = 1
+
+    </select>
+
+    <select id="putSecede" statementType="CALLABLE" parameterType="com.iwell.eye.model.CustVO" resultType="com.iwell.eye.model.CustVO">
+        { call USP_TB_CUST_SECEDE_U (#{custSid})}
+	</select>
+    <select id="putCustInfo" statementType="CALLABLE" parameterType="com.iwell.eye.model.CustVO" resultType="com.iwell.eye.model.CustVO">
+        { call USP_TB_CUST_INFO_U (#{custSid},#{mktYn})}
+	</select>
+</mapper>

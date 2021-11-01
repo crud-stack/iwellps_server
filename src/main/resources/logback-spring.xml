@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds">
+	<property name="LOG_PATH" value="../logs/" />
+	<property name="LOG_DAILY" value="daily/" />
+	<property name="LOG_FILENAME" value="eye" />
+	<property name="LOG_FILENAME_HTTP" value="eye-http" />
+	<property name="LOG_FILENAME_SQL" value="eye-sql" />
+	<property name="LOG_PATTERN" value="%d{HH:mm:ss} %-5level %X{identifier} %logger{36} : %msg%n" />
+	<property name="LOG_MAX_HISTORY" value="30" />
+
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${LOG_PATTERN}</pattern>
+		</encoder>
+		<target>System.out</target>
+	</appender>
+
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_PATH}/${LOG_FILENAME}.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>${LOG_PATTERN}</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_PATH}${LOG_DAILY}/${LOG_FILENAME}.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>${LOG_MAX_HISTORY}</maxHistory>
+		</rollingPolicy>
+	</appender>
+
+	<appender name="FILE_HTTP" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_PATH}/${LOG_FILENAME_HTTP}.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>${LOG_PATTERN}</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_PATH}${LOG_DAILY}/${LOG_FILENAME_HTTP}.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>${LOG_MAX_HISTORY}</maxHistory>
+		</rollingPolicy>
+	</appender>
+
+	<appender name="FILE_SQL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_PATH}/${LOG_FILENAME_SQL}.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>${LOG_PATTERN}</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_PATH}${LOG_DAILY}/${LOG_FILENAME_SQL}.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>${LOG_MAX_HISTORY}</maxHistory>
+		</rollingPolicy>
+	</appender>
+
+	<springProfile name="loc">
+		<root level="INFO">
+			<appender-ref ref="CONSOLE"/>
+			<appender-ref ref="FILE"/>
+		</root>
+		<logger name="com.iwell.eye" level="DEBUG" additivity="false">
+			<appender-ref ref="CONSOLE"/>
+			<appender-ref ref="FILE"/>
+		</logger>
+		<logger name="org.springframework" level="INFO" additivity="false">
+			<appender-ref ref="CONSOLE"/>
+			<appender-ref ref="FILE"/>
+		</logger>
+		<logger name="com.spring.ibatis" level="DEBUG" additivity="false">
+			<appender-ref ref="CONSOLE"/>
+			<appender-ref ref="FILE"/>
+		</logger>
+		<logger name="jdbc" level="WARN" additivity="false">
+			<appender-ref ref="CONSOLE"/>
+			<appender-ref ref="FILE"/>
+		</logger>
+		<logger name="jdbc.resultsettable" level="DEBUG" additivity="false">
+			<appender-ref ref="CONSOLE"/>
+			<appender-ref ref="FILE"/>
+		</logger>
+		<logger name="jdbc.sqltiming" level="DEBUG" additivity="false">
+			<appender-ref ref="CONSOLE"/>
+			<appender-ref ref="FILE_SQL"/>
+		</logger>
+
+		<!-- for HTTP Parameters -->
+		<logger name="http-logger" level="INFO" additivity="false">
+			<appender-ref ref="CONSOLE"/>
+			<appender-ref ref="FILE_HTTP"/>
+		</logger>
+	</springProfile>
+
+	<springProfile name="dev">
+		<root level="INFO">
+			<appender-ref ref="FILE"/>
+		</root>
+		<logger name="com.iwell.eye" level="DEBUG" additivity="false">
+			<appender-ref ref="FILE"/>
+		</logger>
+		<logger name="org.springframework" level="INFO" additivity="false">
+			<appender-ref ref="FILE"/>
+		</logger>
+		<logger name="com.spring.ibatis" level="DEBUG" additivity="false">
+			<appender-ref ref="FILE"/>
+		</logger>
+		<logger name="jdbc" level="WARN" additivity="false">
+			<appender-ref ref="FILE"/>
+		</logger>
+		<logger name="jdbc.resultsettable" level="DEBUG" additivity="false">
+			<appender-ref ref="FILE"/>
+		</logger>
+		<logger name="jdbc.sqltiming" level="DEBUG" additivity="false">
+			<appender-ref ref="FILE_SQL"/>
+		</logger>
+
+		<!-- for HTTP Parameters -->
+		<logger name="http-logger" level="INFO" additivity="false">
+			<appender-ref ref="FILE_HTTP"/>
+		</logger>
+	</springProfile>
+
+	<springProfile name="stg">
+		<root level="INFO">
+			<appender-ref ref="FILE"/>
+		</root>
+		<logger name="com.iwell.eye" level="DEBUG" additivity="false">
+			<appender-ref ref="FILE"/>
+		</logger>
+		<logger name="org.springframework" level="INFO" additivity="false">
+			<appender-ref ref="FILE"/>
+		</logger>
+		<logger name="com.spring.ibatis" level="DEBUG" additivity="false">
+			<appender-ref ref="FILE"/>
+		</logger>
+		<logger name="jdbc" level="WARN" additivity="false">
+			<appender-ref ref="FILE"/>
+		</logger>
+		<logger name="jdbc.resultsettable" level="DEBUG" additivity="false">
+			<appender-ref ref="FILE"/>
+		</logger>
+		<logger name="jdbc.sqltiming" level="DEBUG" additivity="false">
+			<appender-ref ref="FILE_SQL"/>
+		</logger>
+
+		<!-- for HTTP Parameters -->
+		<logger name="http-logger" level="INFO" additivity="false">
+			<appender-ref ref="FILE_HTTP"/>
+		</logger>
+	</springProfile>
+
+	<springProfile name="prd">
+		<root level="WARN">
+			<appender-ref ref="FILE"/>
+		</root>
+		<logger name="com.iwell.eye" level="WARN" additivity="false">
+			<appender-ref ref="FILE"/>
+		</logger>
+		<logger name="org.springframework" level="INFO" additivity="false">
+			<appender-ref ref="FILE"/>
+		</logger>
+		<logger name="com.spring.ibatis" level="WARN" additivity="false">
+			<appender-ref ref="FILE"/>
+		</logger>
+		<logger name="jdbc" level="WARN" additivity="false">
+			<appender-ref ref="FILE"/>
+		</logger>
+		<logger name="jdbc.resultsettable" level="WARN" additivity="false">
+			<appender-ref ref="FILE"/>
+		</logger>
+		<logger name="jdbc.sqltiming" level="WARN" additivity="false">
+			<appender-ref ref="FILE_SQL"/>
+		</logger>
+
+		<!-- for HTTP Parameters -->
+		<logger name="http-logger" level="WARN" additivity="false">
+			<appender-ref ref="CONSOLE"/>
+			<appender-ref ref="FILE_HTTP"/>
+		</logger>
+	</springProfile>
+
+
+</configuration>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iwell.eye.dao.LoginDAO">
+    <select id="postAdminLogin" parameterType="com.iwell.eye.model.LoginVO" resultType="com.iwell.eye.model.LoginVO">
+        SELECT
+            UserSID as userSid
+        ,    PW as pw
+        FROM tb_user
+        WHERE Email = #{email}
+        AND PW = #{pw}
+
+    </select>
+    <select id="postUserLogin" parameterType="com.iwell.eye.model.LoginVO" resultType="com.iwell.eye.model.LoginVO">
+        SELECT
+                CustSID as userSid
+        ,       TokenPW as pw
+        FROM tb_cust
+        WHERE Phone = #{phone}
+        AND BirthDay = #{birthDay}
+        AND CustNm = #{userNm}
+
+    </select>
+</mapper>

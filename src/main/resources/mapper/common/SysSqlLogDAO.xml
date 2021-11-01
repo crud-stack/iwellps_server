@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iwell.eye.common.dao.SysSqlLogDAO">
+
+    <insert id="SqlError" parameterType="com.iwell.eye.common.model.SysLogVO">
+        INSERT INTO sys_ErrSp
+        (
+                ErrNo
+            ,   ErrSvrt
+            ,   ErrStsNo
+            ,   ErrUspNm
+            ,   ErrLineNo
+            ,   ErrMsg
+        ) VALUES
+        (
+                 #{errorNumber}
+                ,#{errorSeverity}
+                ,#{errorState}
+                ,#{procName}
+                ,#{lineNumber}
+                ,#{errorMessage}
+        );
+	</insert>
+</mapper>

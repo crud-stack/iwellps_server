@@ -1,0 +1,72 @@
+# ┌──────────────────────────────
+# │ global
+# └──────────────────────────────
+server:
+  shutdown: graceful
+  error.whitelabel.enabled: false
+#  compression.enabled: false
+#  compression.excluded-user-agents:
+#  compression.mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript
+#  compression.min-response-size: 2048
+
+  # 참조 : Spring boot common properties
+  # https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-application-properties.html#server-properties
+
+  tomcat:
+    #accept-count: 100
+    #max-connections: -1
+    #min-spare-threads: 50
+    #max-threads: -1
+    #max-swallow-size: 2MB
+    #max-http-post-size: 2MB
+    connection-timeout: 10000
+    cluster.port: 5000
+  undertow:
+    #for test
+    #threads.worker: 24
+    accesslog:
+      enabled: false
+      dir: ../logs/
+      rotate: true
+
+spring:
+  lifecycle.timeout-per-shutdown-phase: 1m
+  profiles:
+    active: loc
+  mvc.throw-exception-if-no-handler-found: true
+  resources.add-mappings: false
+  output: 
+  main:
+    allow-bean-definition-overriding: true
+
+management:
+  endpoints:
+    enabled-by-default: false
+    #web.exposure.include: "*"
+
+
+webclient:
+  connection.timeout: 3000
+  read.timeout: 7000
+  write.timeout: 7000
+
+  #kbyte
+  memory.max: 2048
+  #seconds
+  monozip.timeout: 10
+  deliverypossible.timeout: 10
+
+executor-thread:
+  timeout: 10
+
+
+console:
+  jsp:
+    prefix: /WEB-INF/jsp/
+    suffix: .jsp
+
+
+mail.smtp: 25
+mail.host: 211.217.198.57
+mail.id:
+mail.pwd:

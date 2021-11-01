@@ -1,0 +1,46 @@
+# ┌──────────────────────────────
+# │ dev
+# └──────────────────────────────
+server:
+  port.authorize: 9300
+  http2:
+    enabled: true
+#  ssl:
+#    enabled: false
+#    key-store: classpath:key/wildcard_ssookssook_io.pfx
+#    key-store-password: crudsystem1008!
+#    key-store-type: "PKCS12"
+
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:sqlserver://192.168.0.10:1433;DatabaseName=ssmsg2
+    username: sa
+    password: mincu1028!
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDataSource
+    max.pool.size: 10
+  redis:
+    host: 211.233.81.190
+    port: 4000
+    password: crudsystem1008!
+
+  cache:
+    type: redis
+    redis:
+      time-to-live: "60m"
+
+security:
+  token.require: true
+
+allow:
+  ip.require: false
+
+logging:
+  db:
+    api: true
+    sql: true
+
+api:
+  url:
+    ssmsg-message: https://127.0.0.1:9300
+

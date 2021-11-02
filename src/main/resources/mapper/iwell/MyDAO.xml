@@ -37,4 +37,7 @@
     <select id="putCustInfo" statementType="CALLABLE" parameterType="com.iwell.eye.model.CustVO" resultType="com.iwell.eye.model.CustVO">
         { call USP_TB_CUST_INFO_U (#{custSid},#{mktYn})}
 	</select>
+    <select id="putUserInfo" statementType="CALLABLE" parameterType="com.iwell.eye.model.UserVO" resultType="com.iwell.eye.model.UserVO">
+        { call USP_TB_USER_INFO_U (#{userSid},#{pw},#{newPw},#{phone},#{spot})}
+    </select>
 </mapper>

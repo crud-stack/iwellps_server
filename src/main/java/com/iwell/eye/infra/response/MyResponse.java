@@ -11,16 +11,19 @@ public class MyResponse extends EyeBaseVO {
     private String userNm;
     private String custNm;
     private String phone;
+    private String spot;
     private String email;
     private int sex;
     private String birthDay;
     private int mktYn;
     private String mktDt;
 
-    public void setAdminInfo(String userNm, String email, int sex){
+    public void setAdminInfo(String userNm, String email, int sex, String phone, String spot){
         this.userNm = userNm;
         this.email = email;
         this.sex = sex;
+        this.phone = phone;
+        this.spot = spot;
     }
 
     public void setCustInfo(String custNm, String phone, int sex, String birthDay, int mktYn, String mktDt){

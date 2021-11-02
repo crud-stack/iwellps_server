@@ -5,7 +5,6 @@ import com.iwell.eye.model.UserVO;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface LoginDAO {
-    LoginVO postUserLogin(LoginVO vo);
-    LoginVO postCustLogin(LoginVO vo);
+public interface UserDAO {
+    UserVO postEmailOverlap(UserVO vo);
 }

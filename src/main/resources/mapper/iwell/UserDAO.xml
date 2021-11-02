@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iwell.eye.dao.UserDAO">
+
+    <select id="postEmailOverlap" statementType="CALLABLE" parameterType="com.iwell.eye.model.UserVO" resultType="com.iwell.eye.model.UserVO">
+        { call USP_TB_USER_OVERLAP_R (#{email})}
+    </select>
+
+</mapper>

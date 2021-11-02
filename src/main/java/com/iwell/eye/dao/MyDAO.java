@@ -10,4 +10,5 @@ public interface MyDAO {
     CustVO postCustInfo(CustVO custVO);
     CustVO putSecede(CustVO custVO);
     CustVO putCustInfo(CustVO custVO);
+    UserVO putUserInfo(UserVO userVO);
 }

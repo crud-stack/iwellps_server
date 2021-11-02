@@ -2,16 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.iwell.eye.dao.LoginDAO">
-    <select id="postAdminLogin" parameterType="com.iwell.eye.model.LoginVO" resultType="com.iwell.eye.model.LoginVO">
+    <select id="postUserLogin" parameterType="com.iwell.eye.model.LoginVO" resultType="com.iwell.eye.model.LoginVO">
         SELECT
             UserSID as userSid
         ,    PW as pw
         FROM tb_user
         WHERE Email = #{email}
-        AND PW = #{pw}
-
     </select>
-    <select id="postUserLogin" parameterType="com.iwell.eye.model.LoginVO" resultType="com.iwell.eye.model.LoginVO">
+    <select id="postCustLogin" parameterType="com.iwell.eye.model.LoginVO" resultType="com.iwell.eye.model.LoginVO">
         SELECT
                 CustSID as userSid
         ,       TokenPW as pw

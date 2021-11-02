@@ -43,7 +43,7 @@ public class LoginService extends EyeBaseService {
                     ,   form.getPhone()
             );
 
-            loginVO = loginDAO.postUserLogin(loginVO);
+            loginVO = loginDAO.postCustLogin(loginVO);
 
         }
 
@@ -53,8 +53,12 @@ public class LoginService extends EyeBaseService {
                     ,   CryptoUtil.encryptSHA512(form.getPw())
             );
 
-            loginVO = loginDAO.postAdminLogin(loginVO);
+            loginVO = loginDAO.postUserLogin(loginVO);
 
+        }
+
+        if(loginVO == null){
+            throw new EyeApiException(CommonConstant.ERR_INVALID, "사용자 정보가 없습니다.");
         }
 
         String url = API_ROOT_MESSAGE+CommonConstant.AUTH_ACCESS_TOKEN;
@@ -62,11 +66,7 @@ public class LoginService extends EyeBaseService {
         builder.queryParam("grant_type", "password");
         builder.queryParam("username",loginVO.getUserSid());
         builder.queryParam("password",StringUtils.isBlank(form.getPw())?form.getPhone():form.getPw());
-        System.out.println(CryptoUtil.encryptSHA512("01071203655"));
-
-        if(loginVO == null){
-            throw new EyeApiException(CommonConstant.ERR_INVALID, "사용자 정보가 없습니다.");
-        }
+        System.out.println(CryptoUtil.encryptSHA512("Alsrn1028!"));
 
 
         HttpHeaders headers = new HttpHeaders();

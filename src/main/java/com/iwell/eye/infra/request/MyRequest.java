@@ -12,4 +12,9 @@ public class MyRequest extends EyeBaseVO {
     @JsonProperty("isAdmin")
     private boolean isAdmin;
     private int mktYn;
+    private String newPassWord;
+    private String passWord;
+    private String newPassWordCheck;
+    private String phone;
+    private String spot;
 }
